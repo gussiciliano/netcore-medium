@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,6 +27,9 @@ namespace test_net_core_mvc
             var connectionString = Configuration["ConnectionString"];
             services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(connectionString));
             services.AddScoped<DataBaseContext>();
+
+            services.AddDbContext<DatabaseContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("DatabaseContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
