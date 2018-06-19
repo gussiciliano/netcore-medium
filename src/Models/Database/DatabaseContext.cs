@@ -10,6 +10,7 @@ namespace test_net_core_mvc.Models.DataBase
         public DataBaseContext(DbContextOptions<DataBaseContext> options) : base(options){}
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Hero> Heroes { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
