@@ -13,20 +13,32 @@ namespace test_net_core_mvc
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        public Startup(IConfiguration configuration, IHostingEnvironment currentEnvironment)
         {
             Configuration = configuration;
+            CurrentEnvironment = currentEnvironment;
         }
 
         public IConfiguration Configuration { get; }
+        public IHostingEnvironment CurrentEnvironment { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc();
-            var connectionString = Configuration["ConnectionString"];
-            services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(connectionString));
-            services.AddScoped<DataBaseContext>();  
+            // Set database
+            if (CurrentEnvironment.IsEnvironment("Testing"))
+            {
+                // If Testing environment, set in memory database
+                services.AddDbContext<DataBaseContext>(options => options.UseInMemoryDatabase("TestingDB"));
+            }
+            else
+            {
+                var connectionString = Configuration["ConnectionString"];
+                // if not, set the postgres database
+                services.AddDbContext<DataBaseContext>(options => options.UseNpgsql(connectionString));
+            }
+            services.AddScoped<DataBaseContext>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -42,6 +54,7 @@ namespace test_net_core_mvc
             }
 
             app.UseStaticFiles();
+
 
             app.UseMvc(routes =>
             {

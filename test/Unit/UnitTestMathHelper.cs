@@ -2,12 +2,12 @@ using System;
 using test_net_core_mvc.Helpers;
 using Xunit;
 
-namespace test
+namespace test.Unit
 {
-    public class UnitTest1
+    public class UnitTestMathHelper
     {
         [Fact]
-        public void Test1()
+        public void TestSum()
         {
             float number1 = 4;
             float number2 = 10;
@@ -20,7 +20,7 @@ namespace test
         [InlineData(1, 1, 1)]
         [InlineData(1, 2, 2)]
         [InlineData(2, 3, 6)]
-        public void Test2(float number1, float number2, float multiplication)
+        public void testMultiplication(float number1, float number2, float multiplication)
         {
             float testMultiplication = MathHelper.Multiply(number1, number2);
             Assert.Equal(multiplication, testMultiplication);
