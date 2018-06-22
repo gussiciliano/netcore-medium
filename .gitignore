@@ -2,5 +2,5 @@
 obj
 bin
 wwwroot/css/site.css
-appsettings.Development.json
+appsettings.*.json
 node_modules/

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage;
 using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
+using System.Collections.Generic;
 using test_net_core_mvc.Models.DataBase;
 
 namespace testnetcoremvc.Migrations
@@ -19,6 +20,28 @@ namespace testnetcoremvc.Migrations
             modelBuilder
                 .HasAnnotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.SerialColumn)
                 .HasAnnotation("ProductVersion", "2.0.0-rtm-26452");
+
+            modelBuilder.Entity("test_net_core_mvc.Models.DataBase.Hero", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("CreatedAt");
+
+                    b.Property<float>("Height");
+
+                    b.Property<string>("Name");
+
+                    b.Property<List<string>>("Powers");
+
+                    b.Property<DateTime>("UpdatedAt");
+
+                    b.Property<float>("Weight");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Heroes");
+                });
 
             modelBuilder.Entity("test_net_core_mvc.Models.DataBase.User", b =>
                 {
