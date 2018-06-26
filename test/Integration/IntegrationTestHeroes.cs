@@ -24,9 +24,8 @@ namespace test.Integration
         {
             // Set up server configuration
             var configuration = new ConfigurationBuilder()
-                                // Indicate the path for our source code, where the appsettings file is located
+                                // Indicate the path for our source code
                                 .SetBasePath(Path.GetFullPath(@"../../../../src/"))
-                                .AddJsonFile("appsettings.Test.json", optional: false)
                                 .Build();
             // Create builder
             var builder = new WebHostBuilder()
